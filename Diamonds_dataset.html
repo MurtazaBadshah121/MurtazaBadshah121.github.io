@@ -10,9 +10,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Murtaza Badshah" />
 
 
-<title>My Profile</title>
+<title>Diamonds dataset Analysis</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -295,12 +296,76 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">My Profile</h1>
+<h1 class="title toc-ignore">Diamonds dataset Analysis</h1>
+<h4 class="author">Murtaza Badshah</h4>
 
 </div>
 
 
-<p>Welcome to my website. Here I will be analyzing and uploading my reasearch.</p>
+<div id="loading-packages" class="section level3">
+<h3>Loading packages</h3>
+<pre class="r"><code>library(MASS)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE)</code></pre>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="problem-1.-for-this-problem-well-use-the-diamonds-dataset-from-the-ggplot2-package.-use-the-functions-inside-dplyr-and-ggplot2-packages-to-answer-the-following-questions." class="section level3">
+<h3>Problem 1. For this problem we’ll use the <code>diamonds</code> dataset from the <code>ggplot2</code> package. Use the functions inside <code>dplyr</code> and <code>ggplot2</code> packages to answer the following questions.</h3>
+<pre class="r"><code># Change the object of diamonds dataset from tibble to data frame.
+diamonds &lt;- as.data.frame(diamonds)</code></pre>
+<div id="a-draw-a-bar-chart-to-display-the-total-number-of-diamonds-in-the-diamonds-dataset-grouped-by-color-grading." class="section level5">
+<h5>(a) Draw a bar chart to display the total number of diamonds in the <code>diamonds</code> dataset, grouped by <code>color</code> grading.</h5>
+<pre class="r"><code>diamonds%&gt;%
+  ggplot(aes(color))+
+  geom_bar(aes(group = color, fill = color))+
+  coord_flip()+
+  geom_text(stat=&#39;count&#39;, aes(label=..count..), vjust=0.2, hjust = 1.5, 
+            colour = &quot;darkred&quot;, fontface = &quot;bold&quot;)</code></pre>
+<p><img src="Diamonds_dataset_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="b-we-call-diamond-is-colorless-if-color-grading-is-d-e-or-f.-select-colorless-diamonds-from-the-diamonds-dataset-and-assign-it-to-colorless_diamonds-for-later-use." class="section level5">
+<h5>(b) We call diamond is colorless if color grading is D, E, or F. Select colorless diamonds from the <code>diamonds</code> dataset and assign it to <code>colorless_diamonds</code> for later use.</h5>
+<pre class="r"><code>colorless_diamonds &lt;- diamonds%&gt;%
+                          filter(color %in% c(&quot;D&quot;,&quot;E&quot;,&quot;F&quot;))</code></pre>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="c-use-colorless_diamonds-data-frame-to-recreate-the-uploaded-the-value-of-colorless-diamond-plot." class="section level5">
+<h5>(c) Use <code>colorless_diamonds</code> data frame to recreate the uploaded <em>“The Value of Colorless Diamond”</em> plot.</h5>
+<pre class="r"><code>  colorless_diamonds%&gt;%
+  ggplot(aes(carat,price, color = clarity))+
+  geom_jitter()+
+  geom_smooth()+
+  scale_color_brewer(palette = &quot;Spectral&quot;)+
+  labs(x=&quot;Weight of the diamond (carat)&quot;, y = &quot;Price (US Dollars)&quot;, 
+       title = &quot;The Value of Colorless Diamond&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
+<p><img src="Diamonds_dataset_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="d-the-ideal-depth-for-round-diamond-is-between-two-percentages-59.5-and-62.9-inclusive.-select-the-ideal-depth-diamonds-from-the-diamonds-dataset-and-assign-it-to-ideal_depth_diamonds-for-later-use." class="section level5">
+<h5>(d) The ideal depth for round diamond is between two percentages 59.5% and 62.9%, inclusive. Select the ideal depth diamonds from the <code>diamonds</code> dataset and assign it to <code>ideal_depth_diamonds</code> for later use.</h5>
+<pre class="r"><code>ideal_dept_diamonds &lt;- diamonds%&gt;%
+  filter(diamonds$depth &gt;= 59.5 &amp; diamonds$depth &lt;= 62.9)</code></pre>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="e-use-ideal_depth_diamonds-data-frame-to-draw-the-histogram-of-the-depth-for-each-quality-of-the-cut-separately-in-one-graphic-window." class="section level5">
+<h5>(e) Use <code>ideal_depth_diamonds</code> data frame to draw the histogram of the <code>depth</code> for each quality of the <code>cut</code> separately in one graphic window.</h5>
+<pre class="r"><code>ideal_dept_diamonds%&gt;%
+  ggplot(aes(depth))+
+  geom_histogram(bins = 30)+
+  labs(x = &quot;Depth of Diamonds&quot;, 
+       title = &quot;Histogram of diamond cuts based on depth.&quot;)+
+  facet_wrap(~ cut)</code></pre>
+<p><img src="Diamonds_dataset_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="f-the-length-and-width-ratio-gives-an-idea-how-big-or-small-the-diamond-will-appear-also-defining-its-shape.-to-calculate-the-length-and-width-ratio-just-divide-the-length-x-of-the-diamond-by-its-width-y.-add-a-new-variable-named-lwratio-to-the-diamonds-dataset-and-assign-it-to-lw_diamonds." class="section level5">
+<h5>(f) The length and width ratio gives an idea how big or small the diamond will appear, also defining its shape. To calculate the length and width ratio just divide the length (<code>x</code>) of the diamond by its width (<code>y</code>). Add a new variable named <code>LWratio</code> to the <code>diamonds</code> dataset and assign it to <code>LW_diamonds</code>.</h5>
+<pre class="r"><code>LW_diamonds &lt;- diamonds%&gt;%
+  mutate(LWratio = x/y)</code></pre>
+</div>
+</div>
 
 
 
