@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Murtaza Badshah" />
+
+
+<title>Stars_dataset</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Research</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Star_DataAnalysis.html">Stars Analysis</a>
+</li>
+<li>
+  <a href="about.html">Titanic Analysis</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Stars_dataset</h1>
+<h4 class="author">Murtaza Badshah</h4>
+<h4 class="date">1/20/2020</h4>
+
+</div>
+
+
+<div id="import-the-libraries-to-start-the-data-analysis." class="section level2">
+<h2>Import the libraries to start the Data Analysis.</h2>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages --------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## v ggplot2 3.2.1     v purrr   0.3.3
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   1.0.0     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0</code></pre>
+<pre><code>## -- Conflicts ------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(dslabs)
+data(stars)
+options(digits = 3)   # report 3 significant digits</code></pre>
+</div>
+<div id="loading-the-stars-dataset-from-the-dslabs-package-and-assinging-it-to-a-data-frame." class="section level2">
+<h2>Loading the Stars dataset from the dslabs package and assinging it to a data frame.</h2>
+<pre class="r"><code>stars &lt;- as.data.frame(stars)</code></pre>
+<div id="mean-standard-deviation-of-magnitude-in-the-dataset." class="section level3">
+<h3>Mean &amp; Standard Deviation of magnitude in the dataset.</h3>
+<pre class="r"><code>mean(stars$magnitude)</code></pre>
+<pre><code>## [1] 4.26</code></pre>
+<pre class="r"><code>sd(stars$magnitude)</code></pre>
+<pre><code>## [1] 7.35</code></pre>
+</div>
+<div id="desity-plot-measuring-the-magnitude-in-the-dataset." class="section level3">
+<h3>Desity plot measuring the Magnitude in the Dataset.</h3>
+<pre class="r"><code>stars%&gt;%
+  ggplot(aes(magnitude))+
+  geom_density()</code></pre>
+<p><img src="Star_DataAnalysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="desnity-plot-of-the-temperature-to-measure-the-heat-density-of-the-stars-in-the-dataset." class="section level3">
+<h3>Desnity plot of the temperature to measure the heat density of the stars in the dataset.</h3>
+<pre class="r"><code>stars%&gt;%
+  ggplot(aes(temp))+
+  geom_density()</code></pre>
+<p><img src="Star_DataAnalysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="scatter-plot-of-the-data-with-temperature-on-the-x-axis-and-magnitude-on-the-y-axis-to-examine-the-relationship-between-the-variables.-as-we-can-see-that-there-is-a-decreasing-exponential-trend-in-the-line." class="section level3">
+<h3>Scatter plot of the data with temperature on the x-axis and magnitude on the y-axis to examine the relationship between the variables. As we can see that there is a decreasing exponential trend in the line.</h3>
+<pre class="r"><code>stars%&gt;%
+  ggplot(aes(temp, magnitude))+
+  geom_point()+
+  geom_smooth(method = &quot;lm&quot;, se = FALSE)</code></pre>
+<p><img src="Star_DataAnalysis_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="in-order-to-interpret-the-graph-better-we-are-going-to-flip-the-axis-to-get-a-better-understanding-of-the-data." class="section level3">
+<h3>In order to interpret the graph better we are going to flip the axis to get a better understanding of the data.</h3>
+<pre class="r"><code>stars%&gt;%
+  ggplot(aes(temp, magnitude))+
+  geom_point()+
+  geom_smooth(method = &quot;lm&quot;, se = FALSE)+
+  scale_x_continuous(trans=&#39;log10&#39;)+
+  scale_y_reverse()+
+  scale_x_reverse()</code></pre>
+<pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
+## replace the existing scale.</code></pre>
+<p><img src="Star_DataAnalysis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<blockquote>
+<p>Here we are able to see that the brighter and hotter stars lie on the upper left side of the graph and the main sequence stars lie on the upper left center side almost close to the linear regression line.</p>
+</blockquote>
+</div>
+<div id="generally-stars-with-hotter-temperatures-with-higher-magnitude-or-lower-luminosity-are-considered-to-be-white-dwarfs-we-can-outline-them-in-the-above-graph-as-such." class="section level3">
+<h3>Generally stars with hotter temperatures with higher Magnitude or lower luminosity are considered to be White Dwarfs we can outline them in the above graph as such.</h3>
+<pre class="r"><code>wdwarf&lt;- stars%&gt;%
+  filter(magnitude &gt; 10 &amp; temp &gt; 9000)
+
+stars%&gt;%
+  ggplot(aes(x = stars$temp, y = stars$magnitude))+
+  geom_point(alpha = 0.2)+
+  geom_point(data = wdwarf, aes(x = temp, 
+                                y = magnitude, 
+                                color = &quot;red&quot;,))+
+  geom_smooth(method = &quot;lm&quot;, 
+              se = FALSE)+
+  scale_x_continuous(trans=&#39;log10&#39;)+
+  scale_y_reverse()+
+  scale_x_reverse()</code></pre>
+<pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
+## replace the existing scale.</code></pre>
+<p><img src="Star_DataAnalysis_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<blockquote>
+<p>As we observe there are only 4 white dwarfs within the dataset. They have higher temperature and lower magnitudes.</p>
+</blockquote>
+</div>
+<div id="in-order-to-find-the-red-giant-stars-within-the-data-set-we-will-need-to-filter-down-the-data-a-bit-more.-a-hot-giant-usually-has-a-lower-magnitude-as-well-as-a-higher-temperature." class="section level3">
+<h3>In order to find the Red giant stars within the data set we will need to filter down the data a bit more. A hot giant usually has a lower Magnitude as well as a higher temperature.</h3>
+<pre class="r"><code>rgiant&lt;- stars%&gt;%
+  filter(magnitude &lt; 0 &amp; temp &lt; 10000)
+
+stars%&gt;%
+  ggplot(aes(x = stars$temp, y = stars$magnitude))+
+  geom_point(alpha = 0.2)+
+  geom_point(data = rgiant, aes(x = temp, 
+                                y = magnitude, 
+                                color = &quot;red&quot;,))+
+  geom_smooth(method = &quot;lm&quot;, 
+              se = FALSE)+
+  scale_x_continuous(trans=&#39;log10&#39;)+
+  scale_y_reverse()+
+  scale_x_reverse()</code></pre>
+<pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
+## replace the existing scale.</code></pre>
+<p><img src="Star_DataAnalysis_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="add-labeling-to-the-graph-to-identify-the-stars." class="section level3">
+<h3>Add labeling to the graph to identify the stars.</h3>
+<pre class="r"><code>stars%&gt;%
+  ggplot(aes(x = log10(temp), y = magnitude))+
+  geom_point()+
+  geom_label(aes(label = star, 
+                 color = &quot;white&quot;, 
+                 ))+
+  scale_y_reverse()+
+  scale_x_reverse()</code></pre>
+<p><img src="Star_DataAnalysis_files/figure-html/unnamed-chunk-10-1.png" width="1152" /></p>
+<ol style="list-style-type: decimal">
+<li>The least lumninous star in the sample with a surface temperature over 5000K.</li>
+</ol>
+<blockquote>
+<p>Based on the output we can pin point that the lowest magnitude with the highest temperature would be the <strong>vanMaanen’s Star</strong>.</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>The two stars with lowest temperature and highest luminosity are known as supergiants.</li>
+</ol>
+<blockquote>
+<p>The two stars are Beetlejuice &amp; Antares</p>
+</blockquote>
+</div>
+<div id="view-the-same-data-points-without-the-label-and-colored-by-the-type-of-star." class="section level3">
+<h3>View the same data points without the label and colored by the type of star.</h3>
+<pre class="r"><code>stars%&gt;%
+  ggplot(aes(log10(temp),magnitude, color = type))+
+  geom_point()+
+  scale_y_reverse()+
+  scale_x_reverse()</code></pre>
+<p><img src="Star_DataAnalysis_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<ol style="list-style-type: decimal">
+<li><p>M type stars have the lowest temeprature.</p></li>
+<li><p>O type stars have a high temperature.</p></li>
+</ol>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
