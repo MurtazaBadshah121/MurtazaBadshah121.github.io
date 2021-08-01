@@ -516,7 +516,13 @@ $(document).ready(function () {
 <h4 class="date">5/17/2020</h4>
 
 </div>
-<h3>I wanted to see what the covid rate of deaths over time has been and what are the top 10 effected countries that have the highest rate of deaths. Below I have also performed a Hypothesis test to see what the average number of deaths in America have been.</h3>
+
+<h3> The following is a racing chart of covid death counts over time. I wanted to see how each of the countries were effected by Covid-19 over time from January of 2020 to June of 2020. The goal of this report is to test the following hypotheses.</h3>
+<br>
+<h4> • Is the average number of deaths in the USA greater than 1000 per day?</h4>
+
+<br>
+
     
     <div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/2814029" data-url="https://flo.uri.sh/visualisation/2814029/embed"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
     
@@ -580,7 +586,9 @@ covid &lt;- read.csv(&quot;Covid_19dataset.csv&quot;, header = T)</code></pre>
 </div>
 </div>
 <div id="lets-clean-this-data-set-to-only-show-figures-from-usa.-i-also-want-to-just-see-the-relevant-data-such-as-state-name-number-of-confirmed-dead-recovered-people-tested-people-hospitalized-and-the-total-hospitlization-rate-per-100000-people." class="section level2">
-<h2>Lets clean this data set to only show figures from USA. I also want to just see the relevant data such as state name, number of confirmed, dead, recovered, people tested, people hospitalized and the total hospitlization rate per 100,000 people.</h2>
+	<br>
+<h3>Lets clean this data set to only show figures from USA. I also want to just see the relevant data such as state name, number of confirmed, dead, recovered, people tested, people hospitalized and the total hospitlization rate per 100,000 people.</h3>
+<br>
 <pre class="r"><code>covid_us &lt;- covid %&gt;%
   filter(ISO3 == &quot;USA&quot;)%&gt;%
   select(ï..Province_State, Confirmed, Deaths, Recovered, People_Tested,People_Hospitalized, Hospitalization_Rate)%&gt;%
@@ -606,9 +614,11 @@ nrow(covid_us)</code></pre>
 ## 6           18.8312577</code></pre>
 </div>
 <div id="lets-perform-a-simple-hyopthesis-test-to-varify-if-the-average-number-of-deaths-in-usa-is-greater-than-1000-per-day-based-on-the-data-we-have-available-to-us." class="section level2">
-<h2>Lets perform a simple hyopthesis test to varify if the Average number of deaths in USA is greater than 1000 per day based on the data we have available to us.</h2>
+	<br>
+<h3>Lets perform a simple hyopthesis test to varify if the Average number of deaths in USA is greater than 1000 per day based on the data we have available to us.</h3>
+<br>
 <div id="lets-estimate-the-95-confidence-interval-to-estimate-the-population-mean-of-the-total-number-of-deaths" class="section level3">
-<h3>Lets estimate the 95% confidence interval to estimate the population mean of the total number of deaths</h3>
+<h4>Lets estimate the 95% confidence interval to estimate the population mean of the total number of deaths</h4>
 <pre class="r"><code>t.test(covid_us$Deaths, conf.level = 0.95)</code></pre>
 <pre><code>## 
 ##  One Sample t-test
@@ -623,11 +633,12 @@ nrow(covid_us)</code></pre>
 ##  1100.145</code></pre>
 </div>
 <div id="after-performing-the-confidence-interval-we-are-95-confident-that-the-daily-average-number-of-deaths-in-the-us-are-between-954.1125-and-1246.1768." class="section level3">
-<h3>After performing the confidence interval we are 95% confident that the daily average number of deaths in the US are between 954.1125 and 1246.1768.</h3>
+	<br>
+<h4>After performing the confidence interval we are 95% confident that the daily average number of deaths in the US are between 954.1125 and 1246.1768.</h4>
 </div>
 </div>
 <div id="let-us-now-define-our-null-and-alternate-hypotheses" class="section level2">
-<h2>Let us now define our null and alternate hypotheses:</h2>
+<h4>Let us now define our null and alternate hypotheses:</h4>
 <ul>
 <li>Null Hypothesis: Mean number of deaths is 1000. <span class="math display">\[
 Ho: \mu =  1000
@@ -636,6 +647,7 @@ Ho: \mu =  1000
 H_{1}: \mu &gt; 1000
 \]</span></li>
 </ul>
+<br>
 <pre class="r"><code># Perform the ttest calculation to find a conclusion. 
 
 t.test(covid_us$Deaths, mu = 1000, alternative = &quot;greater&quot;)</code></pre>
@@ -652,7 +664,9 @@ t.test(covid_us$Deaths, mu = 1000, alternative = &quot;greater&quot;)</code></pr
 ##  1100.145</code></pre>
 </div>
 <div id="as-you-can-see-by-our-conclusion-since-our-p-value-is-greater-than-0.05-we-fail-to-reject-the-null-hypothesis.-therefore-we-can-conclude-that-we-dont-have-sufficient-evidence-to-claim-that-the-average-number-of-deaths-is-equal-to-1000-per-day." class="section level2">
-<h2>As you can see by our conclusion, since our P-Value is greater than 0.05 we fail to reject the null hypothesis. Therefore we can conclude that we dont have sufficient evidence to claim that the average number of deaths is equal to 1000 per day.</h2>
+	<br>
+<h3>As you can see by our conclusion, since our P-Value is greater than 0.05 we fail to reject the null hypothesis. Therefore we can conclude that we dont have sufficient evidence to claim that the average number of deaths is equal to 1000 per day.</h3>
+<br>
 </div>
 
 
